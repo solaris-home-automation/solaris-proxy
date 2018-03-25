@@ -10,7 +10,7 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 
 
 // Express route for incoming requests for a customer name
-app.get('/things', function(req, res) {
+app.get('/things', function(req, res,next) {
 
     async.series([
       function (cb) {
