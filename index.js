@@ -26,8 +26,8 @@ app.get('/things', function(req, res) {
         });
       },
       function (cb) {
+        console.log('closing I2C');
         i2c1.close(cb);
-        console.log('I2C closed');
       }
     ], function (err) {
       console.log('Error ' + err);
