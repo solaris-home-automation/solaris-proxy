@@ -9,7 +9,7 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 
 
 // Express route for incoming requests for a customer name
-app.get('/things/', function(req, res) {
+app.get('/things', function(req, res) {
   i2c1 = i2c.openSync(1);
   var addresses = i2c1.scanSync();
   res.status(200).send(addresses);
