@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require('express');
 var i2c = require('i2c-bus');
+var async = require('async');
 
 var app = express();
 
