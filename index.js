@@ -18,6 +18,9 @@ app.get('/things', function(req, res) {
         console.log('I2C opened');
       },
       function (cb) {
+        i2c1.i2cFuncs(cb);
+      },
+      function (cb) {
         // scan for devices
         i2c1.scan(function (err, addresses) {
           if (err) return cb(err);
@@ -27,12 +30,14 @@ app.get('/things', function(req, res) {
         });
       },
       function (cb) {
-        console.log('closing I2C');
         i2c1.close(cb);
+        console.log('I2C closed');
       }
     ], function (err) {
-      console.log('Error ' + err);
-      if (err) throw err;
+      if (err) {
+        console.log('Error ' + err);
+        throw err;
+      }
     });
 
 });
