@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+var i2c = require('i2c-bus');
 
 var app = express();
 
@@ -8,8 +9,10 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 
 
 // Express route for incoming requests for a customer name
-app.get('/inputs/:id', function(req, res) {
-  res.status(200).send(inputs[req.params.id]);
+app.get('/things/', function(req, res) {
+  i2c1 = i2c.openSync(1);
+  var addresses = i2c1.scanSync();
+  res.status(200).send(addresses);
 });
 
 // Express route for any other unrecognised incoming requests
