@@ -36,7 +36,7 @@ app.get('/things', function(req, res) {
     ], function (err) {
       if (err) {
         console.log('Error ' + err);
-        throw err;
+        return next(err);
       }
     });
 
