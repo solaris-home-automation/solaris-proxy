@@ -23,6 +23,7 @@ app.get('/things', function(req, res) {
           if (err) return cb(err);
           console.log('Addresses found: '+addresses);
           res.status(200).send(addresses);
+          cb(null);
         });
       },
       function (cb) {
