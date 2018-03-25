@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "connect": "^3.6.6",
     "express": "^4.16.3",
     "i2c-bus": "^3.1.0"
