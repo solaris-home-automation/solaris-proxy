@@ -10,9 +10,29 @@ var inputs = [{ pin: '11', gpio: '17', value: 1 },
 
 // Express route for incoming requests for a customer name
 app.get('/things', function(req, res) {
-  i2c1 = i2c.openSync(1);
-  var addresses = i2c1.scanSync();
-  res.status(200).send(addresses);
+
+    async.series([
+      function (cb) {
+        i2c1 = i2c.open(1, cb);
+        console.log('I2C opened');
+      },
+      function (cb) {
+        // scan for devices
+        i2c1.scan(function (err, addresses) {
+          if (err) return cb(err);
+          console.log('Addresses found: '+addresses);
+          res.status(200).send(addresses);
+        });
+      },
+      function (cb) {
+        i2c1.close(cb);
+        console.log('I2C closed');
+      }
+    ], function (err) {
+      console.log('Error ' + err);
+      if (err) throw err;
+    });
+
 });
 
 // Express route for any other unrecognised incoming requests
